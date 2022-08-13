@@ -100,18 +100,7 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   printf("Device Started!\r\n");
-  LCD_Begin(&hi2c1, 0x27, 2, 16);
-  LCD_SetPin(BL, 0);
-  LCD_Write();
-  HAL_Delay(2000);
-  LCD_SetPin(BL, 1);
-  LCD_Write();
-  HAL_Delay(2000);
-  LCD_SetPin(BL, 0);
-	LCD_Write();
-	HAL_Delay(2000);
-	LCD_SetPin(BL, 1);
-	LCD_Write();
+  LCD_Begin(&hi2c1, 0x27, 2, 16, 1);
 
   /* USER CODE END 2 */
 
