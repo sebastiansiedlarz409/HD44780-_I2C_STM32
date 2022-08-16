@@ -4,7 +4,7 @@
 //INSERT MCU STDLIB HERE
 #include "stm32l4xx_hal.h"
 
-HAL_StatusTypeDef LCD_Begin(I2C_HandleTypeDef* hi2c, uint8_t address, uint8_t rows, uint8_t columns, uint8_t backlight){
+HAL_StatusTypeDef LCD_Begin(I2C_HandleTypeDef* hi2c, uint8_t address, uint8_t rows, uint8_t columns, uint8_t blink, uint8_t backlight){
 	HAL_StatusTypeDef status = HAL_OK;
 
 	lcd_hi2c = hi2c;
@@ -28,8 +28,16 @@ HAL_StatusTypeDef LCD_Begin(I2C_HandleTypeDef* hi2c, uint8_t address, uint8_t ro
 	}
 
 	//move to first position in first row
-	status |= LCD_SendCmd(TURNON_BLINK);
-	status |= LCD_SendCmd(FIRST_ROW_START);
+	if(blink){
+		status |= LCD_SendCmd(TURNON_BLINK);
+	}
+	else{
+		status |= LCD_SendCmd(TURNON_NOBLINK);
+	}
+	//status |= LCD_SendCmd(FIRST_ROW_START);
+
+	status |= LCD_SendCmd(0x01);
+	status |= LCD_SendCmd(0x02);
 
 	return status;
 }
@@ -63,10 +71,10 @@ HAL_StatusTypeDef LCD_PulseEnable(){
 
 	status |= LCD_SetPin(EN, EN_ENABLE);
 	status |= LCD_Write();
-	HAL_Delay(100);
+	HAL_Delay(10);
 	status |= LCD_SetPin(EN, EN_DISABLE);
 	status |= LCD_Write();
-	HAL_Delay(100);
+	HAL_Delay(10);
 
 	return status;
 }
@@ -121,4 +129,8 @@ HAL_StatusTypeDef LCD_SendData(uint8_t data){
 	status |= LCD_PulseEnable();
 
 	return status;
+}
+
+HAL_StatusTypeDef LCD_SendCharacter(uint8_t chr){
+	return LCD_SendData(chr);
 }

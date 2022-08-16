@@ -100,7 +100,11 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   printf("Device Started!\r\n");
-  LCD_Begin(&hi2c1, 0x27, 2, 16, 1);
+  LCD_Begin(&hi2c1, 0x27, 2, 16, 1, 1);
+  LCD_SendCharacter('1');
+  LCD_SendCharacter('2');
+  LCD_SendCharacter('3');
+  LCD_SendCharacter(')');
 
   /* USER CODE END 2 */
 
