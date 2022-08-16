@@ -14,6 +14,7 @@ HAL_StatusTypeDef LCD_Begin(I2C_HandleTypeDef* hi2c, uint8_t address, uint8_t ro
 	lcd_data = 0x00;
 
 	LCD_BackLight(backlight);
+	LCD_SendCmd(0);
 
 	//init screen
 	if(rows == 2){
@@ -26,8 +27,8 @@ HAL_StatusTypeDef LCD_Begin(I2C_HandleTypeDef* hi2c, uint8_t address, uint8_t ro
 		return HAL_ERROR;
 	}
 
-	//move to first postition in first row
-	status |= LCD_SendCmd(TURNON_NOBLINK);
+	//move to first position in first row
+	status |= LCD_SendCmd(TURNON_BLINK);
 	status |= LCD_SendCmd(FIRST_ROW_START);
 
 	return status;
@@ -35,11 +36,6 @@ HAL_StatusTypeDef LCD_Begin(I2C_HandleTypeDef* hi2c, uint8_t address, uint8_t ro
 
 HAL_StatusTypeDef LCD_Write(){
 	return HAL_I2C_Master_Transmit(lcd_hi2c, lcd_address, &lcd_data, 1, 100);
-}
-
-HAL_StatusTypeDef LCD_ClearDataLine(){
-	lcd_data &= 0x0F;
-	return HAL_OK;
 }
 
 HAL_StatusTypeDef LCD_SetPin(uint8_t pin, uint8_t state){
@@ -84,14 +80,40 @@ HAL_StatusTypeDef LCD_SendCmd(uint8_t cmd){
 	status |= LCD_SetPin(RW, RW_WRITE);
 	status |= LCD_SetPin(RS, RS_CMD);
 
-	status |= LCD_ClearDataLine();
+	lcd_data &= 0x0F; //clear data bits
 	status |= LCD_SetPin(D4, hn&0b0001);
 	status |= LCD_SetPin(D5, hn&0b0010);
 	status |= LCD_SetPin(D6, hn&0b0100);
 	status |= LCD_SetPin(D7, hn&0b1000);
 	status |= LCD_PulseEnable();
 
-	status |= LCD_ClearDataLine();
+	lcd_data &= 0x0F; //clear data bits
+	status |= LCD_SetPin(D4, ln&0b0001);
+	status |= LCD_SetPin(D5, ln&0b0010);
+	status |= LCD_SetPin(D6, ln&0b0100);
+	status |= LCD_SetPin(D7, ln&0b1000);
+	status |= LCD_PulseEnable();
+
+	return status;
+}
+
+HAL_StatusTypeDef LCD_SendData(uint8_t data){
+	HAL_StatusTypeDef status = HAL_OK;
+
+	uint8_t hn = (data>>4)&0x0F;
+	uint8_t ln = data&0x0F;
+
+	status |= LCD_SetPin(RW, RW_WRITE);
+	status |= LCD_SetPin(RS, RS_DATA);
+
+	lcd_data &= 0x0F; //clear data bits
+	status |= LCD_SetPin(D4, hn&0b0001);
+	status |= LCD_SetPin(D5, hn&0b0010);
+	status |= LCD_SetPin(D6, hn&0b0100);
+	status |= LCD_SetPin(D7, hn&0b1000);
+	status |= LCD_PulseEnable();
+
+	lcd_data &= 0x0F; //clear data bits
 	status |= LCD_SetPin(D4, ln&0b0001);
 	status |= LCD_SetPin(D5, ln&0b0010);
 	status |= LCD_SetPin(D6, ln&0b0100);
