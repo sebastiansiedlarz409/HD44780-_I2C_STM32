@@ -134,3 +134,12 @@ HAL_StatusTypeDef LCD_SendData(uint8_t data){
 HAL_StatusTypeDef LCD_SendCharacter(uint8_t chr){
 	return LCD_SendData(chr);
 }
+
+HAL_StatusTypeDef LCD_SendString(const char* str){
+	HAL_StatusTypeDef status = HAL_OK;
+	while(*str){
+		status |= LCD_SendCharacter((uint8_t)*str);
+		str++;
+	}
+	return status;
+}
