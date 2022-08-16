@@ -147,3 +147,11 @@ HAL_StatusTypeDef LCD_SendString(const char* str){
 HAL_StatusTypeDef LCD_ClearScreen(){
 	return LCD_SendCmd(0x01);
 }
+
+HAL_StatusTypeDef LCD_MoveCursorLeft(){
+	return LCD_SendCmd(0x10);
+}
+
+HAL_StatusTypeDef LCD_MoveCursorRight(){
+	return LCD_SendCmd(0x14);
+}

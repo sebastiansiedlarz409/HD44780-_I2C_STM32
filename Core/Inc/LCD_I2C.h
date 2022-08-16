@@ -47,4 +47,6 @@ HAL_StatusTypeDef LCD_SendData(uint8_t data);
 HAL_StatusTypeDef LCD_SendCharacter(uint8_t chr);
 HAL_StatusTypeDef LCD_SendString(const char* str);
 HAL_StatusTypeDef LCD_ClearScreen();
+HAL_StatusTypeDef LCD_MoveCursorLeft();
+HAL_StatusTypeDef LCD_MoveCursorRight();
 HAL_StatusTypeDef LCD_BackLight(uint8_t on);
