@@ -143,3 +143,7 @@ HAL_StatusTypeDef LCD_SendString(const char* str){
 	}
 	return status;
 }
+
+HAL_StatusTypeDef LCD_ClearScreen(){
+	return LCD_SendCmd(0x01);
+}

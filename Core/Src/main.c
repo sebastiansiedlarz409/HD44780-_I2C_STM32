@@ -105,6 +105,8 @@ int main(void)
   LCD_SendCharacter('#');
   LCD_SendCharacter('(');
   LCD_SendCharacter(')');
+  HAL_Delay(2000);
+  LCD_ClearScreen();
   LCD_SendString("ALA");
 
   /* USER CODE END 2 */
