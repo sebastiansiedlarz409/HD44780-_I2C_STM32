@@ -155,3 +155,11 @@ HAL_StatusTypeDef LCD_MoveCursorLeft(){
 HAL_StatusTypeDef LCD_MoveCursorRight(){
 	return LCD_SendCmd(0x14);
 }
+
+HAL_StatusTypeDef LCD_MoveDisplayLeft(){
+	return LCD_SendCmd(0x18);
+}
+
+HAL_StatusTypeDef LCD_MoveDisplayRight(){
+	return LCD_SendCmd(0x1C);
+}

@@ -110,6 +110,10 @@ int main(void)
   LCD_MoveCursorRight();
   LCD_MoveCursorRight();
   LCD_SendString("ALA");
+  HAL_Delay(1000);
+  LCD_MoveDisplayLeft();
+  HAL_Delay(1000);
+  LCD_MoveDisplayLeft();
 
   /* USER CODE END 2 */
 
