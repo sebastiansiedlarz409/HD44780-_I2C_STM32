@@ -52,3 +52,5 @@ HAL_StatusTypeDef LCD_MoveCursorRight();
 HAL_StatusTypeDef LCD_MoveDisplayLeft();
 HAL_StatusTypeDef LCD_MoveDisplayRight();
 HAL_StatusTypeDef LCD_BackLight(uint8_t on);
+HAL_StatusTypeDef LCD_TurnOff();
+HAL_StatusTypeDef LCD_TurnOn(uint8_t blink);

@@ -163,3 +163,14 @@ HAL_StatusTypeDef LCD_MoveDisplayLeft(){
 HAL_StatusTypeDef LCD_MoveDisplayRight(){
 	return LCD_SendCmd(0x1C);
 }
+
+HAL_StatusTypeDef LCD_TurnOff(){
+	return LCD_SendCmd(0x08);
+}
+
+HAL_StatusTypeDef LCD_TurnOn(uint8_t blink){
+	if (blink)
+		return LCD_SendCmd(0xF);
+	else
+		return LCD_SendCmd(0xE);
+}

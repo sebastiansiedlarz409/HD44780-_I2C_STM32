@@ -101,19 +101,11 @@ int main(void)
   /* USER CODE BEGIN 2 */
   printf("Device Started!\r\n");
   LCD_Begin(&hi2c1, 0x27, 2, 16, 1, 1);
-  LCD_SendCharacter('!');
-  LCD_SendCharacter('#');
-  LCD_SendCharacter('(');
-  LCD_SendCharacter(')');
+  LCD_SendString("AHOJ");
   HAL_Delay(2000);
-  LCD_ClearScreen();
-  LCD_MoveCursorRight();
-  LCD_MoveCursorRight();
-  LCD_SendString("ALA");
-  HAL_Delay(1000);
-  LCD_MoveDisplayLeft();
-  HAL_Delay(1000);
-  LCD_MoveDisplayLeft();
+  LCD_TurnOff();
+  HAL_Delay(2000);
+  LCD_TurnOn(1);
 
   /* USER CODE END 2 */
 
