@@ -25,13 +25,6 @@
 #define EN_ENABLE 1
 #define EN_DISABLE 0
 
-//COMMANDS
-#define TURNON_BLINK 		0x0F
-#define TURNON_NOBLINK 		0x0E
-
-#define FIRST_ROW_START 	0x80
-#define SECOND_ROW_START	0xC0
-
 I2C_HandleTypeDef* lcd_hi2c;
 uint8_t lcd_address;
 uint8_t lcd_rows;

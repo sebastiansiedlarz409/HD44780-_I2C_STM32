@@ -29,10 +29,10 @@ HAL_StatusTypeDef LCD_Begin(I2C_HandleTypeDef* hi2c, uint8_t address, uint8_t ro
 
 	//move to first position in first row
 	if(blink){
-		status |= LCD_SendCmd(TURNON_BLINK);
+		status |= LCD_SendCmd(0x0F);
 	}
 	else{
-		status |= LCD_SendCmd(TURNON_NOBLINK);
+		status |= LCD_SendCmd(0x0E);
 	}
 	//status |= LCD_SendCmd(FIRST_ROW_START);
 
