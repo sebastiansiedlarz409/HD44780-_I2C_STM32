@@ -108,6 +108,8 @@ int main(void)
   LCD_TurnOn(1);
   LCD_SetCursorPosition(1, 8);
 
+  HAL_Delay(2000);
+  LCD_CursorOff();
   /* USER CODE END 2 */
 
   /* Infinite loop */

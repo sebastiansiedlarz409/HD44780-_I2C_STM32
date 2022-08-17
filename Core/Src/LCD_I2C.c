@@ -182,3 +182,11 @@ HAL_StatusTypeDef LCD_TurnOn(uint8_t blink){
 	else
 		return LCD_SendCmd(0xE);
 }
+
+HAL_StatusTypeDef LCD_CursorOff(){
+	return LCD_SendCmd(0x0C);
+}
+
+HAL_StatusTypeDef LCD_CursorOn(uint8_t blink){
+	return LCD_TurnOn(blink);
+}

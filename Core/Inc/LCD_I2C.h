@@ -47,3 +47,5 @@ HAL_StatusTypeDef LCD_BackLight(uint8_t on);
 HAL_StatusTypeDef LCD_TurnOff();
 HAL_StatusTypeDef LCD_TurnOn(uint8_t blink);
 HAL_StatusTypeDef LCD_SetCursorPosition(uint8_t row, uint8_t column);
+HAL_StatusTypeDef LCD_CursorOff();
+HAL_StatusTypeDef LCD_CursorOn(uint8_t blink);
