@@ -106,6 +106,7 @@ int main(void)
   LCD_TurnOff();
   HAL_Delay(2000);
   LCD_TurnOn(1);
+  LCD_SetCursorPosition(1, 8);
 
   /* USER CODE END 2 */
 

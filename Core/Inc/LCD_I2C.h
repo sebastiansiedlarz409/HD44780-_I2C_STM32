@@ -34,7 +34,6 @@ uint8_t lcd_data;
 HAL_StatusTypeDef LCD_Begin(I2C_HandleTypeDef* hi2c, uint8_t address, uint8_t rows, uint8_t columns, uint8_t blink, uint8_t backlight);
 HAL_StatusTypeDef LCD_Write();
 HAL_StatusTypeDef LCD_SetPin(uint8_t pin, uint8_t state);
-
 HAL_StatusTypeDef LCD_SendCmd(uint8_t cmd);
 HAL_StatusTypeDef LCD_SendData(uint8_t data);
 HAL_StatusTypeDef LCD_SendCharacter(uint8_t chr);
@@ -47,3 +46,4 @@ HAL_StatusTypeDef LCD_MoveDisplayRight();
 HAL_StatusTypeDef LCD_BackLight(uint8_t on);
 HAL_StatusTypeDef LCD_TurnOff();
 HAL_StatusTypeDef LCD_TurnOn(uint8_t blink);
+HAL_StatusTypeDef LCD_SetCursorPosition(uint8_t row, uint8_t column);

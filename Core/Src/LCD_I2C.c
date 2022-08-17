@@ -34,7 +34,6 @@ HAL_StatusTypeDef LCD_Begin(I2C_HandleTypeDef* hi2c, uint8_t address, uint8_t ro
 	else{
 		status |= LCD_SendCmd(0x0E);
 	}
-	//status |= LCD_SendCmd(FIRST_ROW_START);
 
 	status |= LCD_SendCmd(0x01);
 	status |= LCD_SendCmd(0x02);
@@ -162,6 +161,15 @@ HAL_StatusTypeDef LCD_MoveDisplayLeft(){
 
 HAL_StatusTypeDef LCD_MoveDisplayRight(){
 	return LCD_SendCmd(0x1C);
+}
+
+HAL_StatusTypeDef LCD_SetCursorPosition(uint8_t row, uint8_t column){
+	if(row >= lcd_rows || column >= lcd_columns) return HAL_ERROR;
+
+	HAL_StatusTypeDef status = LCD_SendCmd(0x02);
+
+	uint8_t offset = (row*0x40)+column;
+	return LCD_SendCmd(0x80+offset) | status;
 }
 
 HAL_StatusTypeDef LCD_TurnOff(){
